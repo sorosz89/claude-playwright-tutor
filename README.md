@@ -25,6 +25,11 @@ complete reference implementation -- try the challenge yourself first.
   tool-loop concepts beyond what's implemented here). Read before, not after.
   - `learning/drills/` -- copy-paste Socratic-tutor prompts, one per primer, that
     quiz your recall instead of letting you just recognize the ideas on the page.
+- `articles/` -- standalone, shareable write-ups derived from this repo. Currently:
+  [`a-model-for-learning-with-ai.md`](./articles/a-model-for-learning-with-ai.md), a
+  reflection mapping the process that built this repo onto real learning-science
+  research (plus a [LinkedIn-ready version](./articles/a-model-for-learning-with-ai.linkedin.txt)
+  of the same piece).
 
 ## Before you start
 

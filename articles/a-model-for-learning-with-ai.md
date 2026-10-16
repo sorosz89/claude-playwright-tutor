@@ -1,9 +1,6 @@
 # A model for learning with AI (a reflection on building this repo)
 
-This doc is different from `01-05`. Those teach concepts *inside* the repo
-(structured output, guardrails, agents). This one steps back and asks: what was the
-actual *process* that produced this repo and its learning materials, and is there a
-reusable model in it? It's optional, meta, and not challenge-prep reading.
+This article is a companion to [`claude-tutor`](https://github.com/sorosz89/claude-playwright-tutor), a small Playwright + GenAI learning repo, and specifically to its [`learning/`](../learning/) docs — five primers that teach concepts *inside* the repo (structured output, guardrails, agents). This piece steps back and asks a different question: what was the actual *process* that produced that repo and its learning materials, and is there a reusable model in it?
 
 The short answer: nothing here is new. Every step this session actually took maps
 onto learning-science research that's decades old. That's reassuring, not
@@ -21,7 +18,7 @@ person at a time.
 | 4 | A research pass verified the *current* SDK APIs (tool-use shape, structured-output helpers, package versions) via web search before any code was written — and surfaced a claim (a fictitious model name and a tool-use restriction) that didn't match reality and was corrected before it reached the plan. | Don't let an AI's confident-sounding research become fact unchecked. |
 | 5 | The baseline Playwright suite was built fully working, as a worked example. Each TODO-driven challenge got a complete `solutions/` reference, a TODO stub with *one case already filled in* as a model to imitate, and fully-wired surrounding files (spec, types, wiring) so only the core logic was left undone. | Show a complete example before asking for an extension of the pattern. |
 | 6 | The scaffold was actually run: `npm install`, typecheck, lint, the baseline suite against the real hosted app (passed 9/9), and the unfinished TODO stubs (confirmed they failed exactly at the expected boundary, not somewhere else). | Verify against reality, not against how confident the output looked. |
-| 7 | You said you didn't want to just implement something that works — you wanted to understand it first. Five primer docs (`learning/01-05`) were added, explaining the concepts *before* the TODOs, cross-linked so they're read first. | Explicit instruction inserted before guided practice. |
+| 7 | You said you didn't want to just implement something that works — you wanted to understand it first. Five primer docs (the repo's [`learning/`](../learning/) folder) were added, explaining the concepts *before* the TODOs, cross-linked so they're read first. | Explicit instruction inserted before guided practice. |
 | 8 | You asked for a Socratic drill — a tutor that quizzes recall of those primers, probing wrong answers with hints and only revealing the plain answer after real attempts. | A separate, later step to test whether the explanation actually stuck. |
 | 9 | The repo was committed and pushed to GitHub. | Shipping the artifact. |
 | 10 | This document — stepping back from the artifact to ask what the process itself teaches. | Reflection, fed back into how the next thing gets built. |
@@ -96,9 +93,10 @@ are three different cognitive activities, and conflating them hides whether any 
 them actually happened. **Retrieval practice / the testing effect** (Roediger &
 Karpicke, 2006) found that *actively recalling* material produces better long-term
 retention than re-reading it — re-reading mostly builds a false sense of familiarity,
-not retrievable knowledge. That's the direct justification for keeping `learning/*.md`
-(knowing), the challenge TODOs (doing), and `learning/drills/` (recalling, independent
-of and after the other two) as three separate artifacts instead of one. *(Rows 7 and 8
+not retrievable knowledge. That's the direct justification for keeping the primers in
+[`learning/`](../learning/) (knowing), the challenge TODOs (doing), and
+[`learning/drills/`](../learning/drills/) (recalling, independent of and after the
+other two) as three separate artifacts instead of one. *(Rows 7 and 8
 — the primers, then the drills, added as two distinct, later steps.)*
 
 ### 7. Close the loop with reflection

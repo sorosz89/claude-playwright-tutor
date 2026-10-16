@@ -36,7 +36,7 @@ letting you just recognize the ideas on the page.
 
 ## Curious how this repo itself came together?
 
-[`06-a-model-for-learning-with-ai.md`](./06-a-model-for-learning-with-ai.md) is a
-separate, optional reflection — not challenge-prep reading — that steps back from docs
-01-05 and the drills and maps the process that produced them onto real learning-science
-research, with this repo's own build as the worked example.
+[`../articles/a-model-for-learning-with-ai.md`](../articles/a-model-for-learning-with-ai.md)
+is a separate, optional reflection — not challenge-prep reading — that steps back from
+docs 01-05 and the drills and maps the process that produced them onto real
+learning-science research, with this repo's own build as the worked example.
