@@ -28,8 +28,7 @@ complete reference implementation -- try the challenge yourself first.
 - `articles/` -- standalone, shareable write-ups derived from this repo. Currently:
   [`a-model-for-learning-with-ai.md`](./articles/a-model-for-learning-with-ai.md), a
   reflection mapping the process that built this repo onto real learning-science
-  research (plus a [LinkedIn-ready version](./articles/a-model-for-learning-with-ai.linkedin.txt)
-  of the same piece).
+  research.
 
 ## Before you start
 
