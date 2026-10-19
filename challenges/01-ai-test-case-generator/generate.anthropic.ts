@@ -31,20 +31,11 @@ export async function generateTestPlan(featureSpec: string): Promise<TestPlan> {
   //
   // const response = await client.messages.create({ ... });
 
-  // TODO 2: Find the content block with type "tool_use" in response.content.
-  // Throw a clear error if there isn't one.
-  //
-  // const toolUse = response.content.find(
-  //   (block): block is Anthropic.ToolUseBlock => block.type === 'tool_use',
-  // );
-  // if (!toolUse) {
-  //   throw new Error('Claude responded without calling submit_test_plan.');
-  // }
+  // TODO 2: Find the content block with type "tool_use" in response.content
+  // (type: Anthropic.ToolUseBlock). Throw a clear error if there isn't one.
 
   // TODO 3: Never trust toolUse.input as-is -- re-validate it with
   // TestPlanSchema.parse(toolUse.input) and return the validated TestPlan.
-  //
-  // return TestPlanSchema.parse(toolUse.input);
 
   throw new Error('generateTestPlan (anthropic) is not implemented yet -- see TODOs above.');
 }

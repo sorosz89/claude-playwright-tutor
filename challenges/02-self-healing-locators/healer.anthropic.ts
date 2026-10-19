@@ -32,41 +32,13 @@ export class AnthropicLocatorHealer implements LocatorHealer {
     //   - tool_choice: { type: 'tool', name: TOOL_NAME }
     //   - a user message that includes input.domSnapshot, input.brokenSelector, and
     //     input.intentDescription
-    //
-    // const response = await this.client.messages.create({
-    //   model: getModel(),
-    //   max_tokens: 512,
-    //   system: SYSTEM_PROMPT,
-    //   messages: [{ role: 'user', content: [
-    //     `Broken selector: ${input.brokenSelector}`,
-    //     `Intent: ${input.intentDescription}`,
-    //     `DOM snapshot:\n${input.domSnapshot}`,
-    //   ].join('\n\n') }],
-    //   tools: [{
-    //     name: TOOL_NAME,
-    //     description: 'Submit the corrected CSS selector and a one-sentence reason.',
-    //     input_schema: z.toJSONSchema(LocatorHealResultSchema) as Anthropic.Tool.InputSchema,
-    //   }],
-    //   tool_choice: { type: 'tool', name: TOOL_NAME },
-    // });
 
     // TODO 2: Extract the tool_use block and validate it with
     // LocatorHealResultSchema.parse(...)
-    //
-    // const toolUse = response.content.find(
-    //   (block): block is Anthropic.ToolUseBlock => block.type === 'tool_use',
-    // );
-    // if (!toolUse) throw new Error('Claude responded without calling submit_healed_selector.');
-    // const result = LocatorHealResultSchema.parse(toolUse.input);
 
     // TODO 3: Run the guardrail --
     // isPlausibleSelector(result.healedSelector, input.brokenSelector) -- and throw a
     // clear error if it fails. Only return the result once it passes.
-    //
-    // if (!isPlausibleSelector(result.healedSelector, input.brokenSelector)) {
-    //   throw new Error(`Guardrail rejected implausible selector: "${result.healedSelector}"`);
-    // }
-    // return result;
 
     throw new Error('AnthropicLocatorHealer.heal is not implemented yet -- see TODOs above.');
   }
