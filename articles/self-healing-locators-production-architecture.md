@@ -53,30 +53,62 @@ not as a replacement for someone patching the page object's source selector.
 
 ## Reference architecture
 
+As a UML sequence diagram, `instance : Type` labels and all: solid arrows with
+filled heads are synchronous calls, dashed arrows are their returns, the
+activation bars mark who's actually doing work at each point, and the self-loops
+on `hl` are the two checks the healer runs on its own output before handing it
+back. The one open-headed, dashed arrow near the end (`w--)human`) is the odd one
+out on purpose -- it's fire-and-forget, logged and left for a human, and nothing
+in the test waits on it the way everything above it does.
+
 ```mermaid
-flowchart TD
-    A[Spec calls page object method<br/>e.g. todoPage.addTodo] --> B[Page object's primary locator]
-    B -->|resolves, count == 1| C[Interact normally]
-    B -->|fails| D[SelfHealingLocator wrapper]
+sequenceDiagram
+    autonumber
+    participant spec as spec : Test
+    participant po as po : Page object
+    participant w as w : SelfHealingLocator
+    participant pg as pg : Page (DOM)
+    participant hl as hl : LocatorHealer
+    participant ch as ch : HealCache
+    actor human as Human reviewer
 
-    D --> E{Cached healed selector<br/>for this broken selector?}
-    E -->|hit| F[Try cached selector]
-    F -->|resolves| C
-    F -->|also fails: DOM moved again| G[Invalidate cache entry] --> H
+    spec->>+po: addTodo("Buy milk")
+    po->>+w: resolve()
+    w->>+pg: locator(primarySelector).count()
+    pg-->>-w: 0 (not found)
 
-    E -->|miss| H[Call LLM Healer]
-    H --> I[Schema validation<br/>zod / withStructuredOutput]
-    I --> J[Plausibility guardrail<br/>isPlausibleSelector]
-    J -->|rejected| K[Fail test loudly<br/>log rejected suggestion]
-    J --> L[Resolve candidate against<br/>live DOM: count == 1?]
-    L -->|no| K
-    L -->|yes| M[Use healed selector<br/>for this run]
+    w->>+ch: get(primarySelector)
+    ch-->>-w: miss
+    Note over w,ch: a cache hit here would jump straight to<br/>record() below -- no DOM snapshot, no LLM call
 
-    M --> C
-    M --> N[Record in shared heal cache]
-    N --> O[Surface to review queue<br/>Slack / issue / dashboard row]
-    O --> P[Human patches the page object's<br/>primary selector]
-    P -.closes the loop, cache entry<br/>becomes unnecessary.-> B
+    w->>+pg: innerHTML(domScope)
+    pg-->>-w: domSnapshot
+
+    w->>+hl: heal(domSnapshot, brokenSelector, intent)
+    hl->>hl: validate shape (zod / withStructuredOutput)
+    hl->>hl: isPlausibleSelector(healedSelector)
+    hl-->>-w: { healedSelector, reasoning }, or throws
+
+    alt guardrail rejects
+        w-->>po: throw
+    else guardrail accepts
+        w->>+pg: locator(healedSelector).count()
+        pg-->>-w: 1 (exactly one match)
+
+        w->>+ch: record(primarySelector, healedSelector, reasoning)
+        ch-->>-w: ok
+        w--)human: notify: selector healed, please review
+
+        w-->>po: Locator
+        po->>+pg: fill("Buy milk"), press("Enter")
+        pg-->>-po: ok (Playwright auto-waited)
+    end
+    deactivate w
+
+    po-->>spec: done, or test fails loudly with rejected selector logged
+    deactivate po
+
+    Note over human: Later, asynchronously: reviews the notification<br/>and patches po's primary selector in source.
 ```
 
 Five components do the work:
