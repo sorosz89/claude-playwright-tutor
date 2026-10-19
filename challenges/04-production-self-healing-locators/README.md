@@ -3,12 +3,17 @@
 ## Background reading
 
 Before touching the TODOs, read
+[`../../learning/06-production-architecture.md`](../../learning/06-production-architecture.md)
+-- the condensed primer for exactly this challenge: layering, the cache as
+amortization (not correctness), the live-DOM guardrail, and surfacing heals to a
+human. For the full write-up with code, see
 [`../../articles/self-healing-locators-production-architecture.md`](../../articles/self-healing-locators-production-architecture.md)
 -- this challenge *is* that article's reference architecture, turned into
 something you build and test instead of just read. Also re-read
 [`../../learning/04-guardrails-and-trust.md`](../../learning/04-guardrails-and-trust.md):
-the live-DOM check you add here is the guardrail that primer's string-only lesson
-structurally couldn't cover in Challenge 2.
+the live-DOM check you add here is a third guardrail layer on top of the two that
+primer already covers. After reading, test what stuck with
+[`../../learning/drills/drill-06-production-architecture.md`](../../learning/drills/drill-06-production-architecture.md).
 
 ## Goal
 

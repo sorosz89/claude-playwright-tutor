@@ -20,6 +20,7 @@ letting you just recognize the ideas on the page.
 | [`03-anthropic-sdk-vs-langchain.md`](./03-anthropic-sdk-vs-langchain.md) | Both challenges | What the raw `@anthropic-ai/sdk` call looks like underneath, versus what `@langchain/anthropic` abstracts away — why you're implementing everything twice. |
 | [`04-guardrails-and-trust.md`](./04-guardrails-and-trust.md) | Challenge 2 | Why schema validation alone isn't enough, the DOM-snapshot prompt-injection angle, and fail-safe design for acting on model output. |
 | [`05-agents-and-tool-loops.md`](./05-agents-and-tool-loops.md) | Challenge 3 | What changes once a model takes multiple actions in a loop instead of answering once — the mechanic Challenge 3 implements as an exploratory-testing agent. |
+| [`06-production-architecture.md`](./06-production-architecture.md) | Challenge 4 | What changes when Challenge 2's healer moves from a single demo test into a real suite — layering healing into the page object, caching as amortization (not correctness), the live-DOM guardrail, and surfacing heals to a human instead of auto-patching. |
 
 ## How this maps to the repo
 
@@ -32,6 +33,10 @@ letting you just recognize the ideas on the page.
 - **Challenge 3 (Exploratory Testing Agent)** loops a model through multiple real tool
   calls instead of one request/response -- read doc 05 first, and doc 04 again for the
   path/selector guardrails applied per tool call.
+- **Challenge 4 (Production Self-Healing Architecture)** takes Challenge 2's healer,
+  unchanged, and wraps it in the architecture a real suite needs -- read doc 06 first;
+  it builds directly on doc 04's two-layer guardrail model and adds a third layer, so
+  re-skim 04 if it's not fresh.
 
 ## Curious how this repo itself came together?
 

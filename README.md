@@ -28,8 +28,9 @@ and exactly which functions are TODOs. A `solutions/` subfolder in each holds a
 complete reference implementation -- try the challenge yourself first.
 
 - `learning/` -- short primers on the concepts behind the challenges (structured
-  output/tool use, raw SDK vs. LangChain, guardrails and trust, and agent/tool-loop
-  concepts -- now implemented in Challenge 3). Read before, not after.
+  output/tool use, raw SDK vs. LangChain, guardrails and trust, agent/tool-loop
+  concepts implemented in Challenge 3, and the production self-healing architecture
+  implemented in Challenge 4). Read before, not after.
   - `learning/drills/` -- copy-paste Socratic-tutor prompts, one per primer, that
     quiz your recall instead of letting you just recognize the ideas on the page.
 - `articles/` -- standalone, shareable write-ups derived from this repo:
@@ -43,7 +44,7 @@ complete reference implementation -- try the challenge yourself first.
 
 If you want to understand *why* the challenges are built the way they are before
 writing any code, read [`learning/README.md`](./learning/README.md) first -- it's a
-reading list of five short docs, cross-linked from each challenge's own README. After
+reading list of six short docs, cross-linked from each challenge's own README. After
 each one, test whether it stuck with the matching prompt in
 [`learning/drills/`](./learning/drills/README.md).
 

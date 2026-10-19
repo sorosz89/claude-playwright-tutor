@@ -17,7 +17,7 @@ scores, just a plain-language recap of what landed and what needed the reveal.
 4. Answer one question at a time. Don't look at the source doc while answering —
    that defeats the point.
 
-## The five drills
+## The six drills
 
 | Drill | Drills your recall of |
 |---|---|
@@ -26,3 +26,4 @@ scores, just a plain-language recap of what landed and what needed the reveal.
 | [`drill-03-anthropic-sdk-vs-langchain.md`](./drill-03-anthropic-sdk-vs-langchain.md) | [`../03-anthropic-sdk-vs-langchain.md`](../03-anthropic-sdk-vs-langchain.md) |
 | [`drill-04-guardrails-and-trust.md`](./drill-04-guardrails-and-trust.md) | [`../04-guardrails-and-trust.md`](../04-guardrails-and-trust.md) |
 | [`drill-05-agents-and-tool-loops.md`](./drill-05-agents-and-tool-loops.md) | [`../05-agents-and-tool-loops.md`](../05-agents-and-tool-loops.md) |
+| [`drill-06-production-architecture.md`](./drill-06-production-architecture.md) | [`../06-production-architecture.md`](../06-production-architecture.md) |
