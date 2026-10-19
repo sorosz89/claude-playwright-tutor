@@ -18,6 +18,10 @@ against Playwright's hosted TodoMVC demo app (`https://demo.playwright.dev/todom
   - `challenges/03-exploratory-testing-agent/` -- a small ReAct-style agent loop that
     drives the real app through a fixed toolbox (navigate/click/type/read_page) and a
     dedicated `finish` tool, reporting what it found.
+  - `challenges/04-production-self-healing-locators/` -- the production architecture
+    around Challenge 2's healer: wire it into a page object behind a cache and a
+    live-DOM guardrail, so the spec never knows healing exists and the LLM only runs
+    once per real DOM change.
 
 Each challenge folder has its own `README.md` with the goal, the concept it teaches,
 and exactly which functions are TODOs. A `solutions/` subfolder in each holds a
@@ -28,10 +32,12 @@ complete reference implementation -- try the challenge yourself first.
   concepts -- now implemented in Challenge 3). Read before, not after.
   - `learning/drills/` -- copy-paste Socratic-tutor prompts, one per primer, that
     quiz your recall instead of letting you just recognize the ideas on the page.
-- `articles/` -- standalone, shareable write-ups derived from this repo. Currently:
+- `articles/` -- standalone, shareable write-ups derived from this repo:
   [`a-model-for-learning-with-ai.md`](./articles/a-model-for-learning-with-ai.md), a
   reflection mapping the process that built this repo onto real learning-science
-  research.
+  research, and
+  [`self-healing-locators-production-architecture.md`](./articles/self-healing-locators-production-architecture.md),
+  the reference architecture Challenge 4 builds.
 
 ## Before you start
 
@@ -58,6 +64,8 @@ npm run test:challenge2            # Challenge 2, raw @anthropic-ai/sdk
 npm run test:challenge2:langchain  # Challenge 2, LangChain.js
 npm run test:challenge3            # Challenge 3, raw @anthropic-ai/sdk
 npm run test:challenge3:langchain  # Challenge 3, LangChain.js
+npm run test:challenge4            # Challenge 4, raw @anthropic-ai/sdk
+npm run test:challenge4:langchain  # Challenge 4, LangChain.js
 npm run test:all                   # everything
 npm run typecheck
 npm run lint
@@ -73,3 +81,7 @@ npm run report                     # open the last HTML report
    and `langchain` variants of each and compare the two implementations once both are
    done -- Challenge 3 is the most interesting comparison, since it's the first time
    either side has to write a loop instead of a single call.
+3. Challenge 4 builds directly on Challenge 2: same healer, unchanged, now wrapped in
+   the architecture a real suite needs. Do it right after Challenge 2 if you want the
+   contrast fresh, or last, once Challenges 1-3 have made the raw-SDK/LangChain split
+   familiar enough that this one can focus entirely on the architecture instead.
