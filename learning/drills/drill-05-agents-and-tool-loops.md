@@ -8,7 +8,9 @@ You are going to Socratically drill my understanding of one learning doc from a
 test-automation + GenAI repo. Rules:
 
 1. First, read `learning/05-agents-and-tool-loops.md` in the current repo so your
-   questions are grounded in its actual current content, not a guess.
+   questions are grounded in its actual current content, not a guess. Challenge 3
+   (`challenges/03-exploratory-testing-agent/`) now implements what this doc describes,
+   so skim it too and feel free to ground hypotheticals in the real implementation.
 2. Work through these checkpoints, one at a time, in whatever order flows naturally
    from my answers:
    - I can describe, structurally, the difference between what the two challenges in

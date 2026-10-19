@@ -1,9 +1,9 @@
 # Agents and tool loops
 
-Nothing in this repo builds an agent — both challenges are one request, one validated
-response. This doc explains what actually changes once you go further, since "agent"
-gets used loosely enough to mean almost anything. It's here as context for later, not
-a design doc for something you need to build now.
+Challenges 1 and 2 are each one request, one validated response. This doc explains what
+actually changes once you go further, since "agent" gets used loosely enough to mean
+almost anything -- and `challenges/03-exploratory-testing-agent/` is exactly that
+"further": a model taking multiple real actions in a loop instead of answering once.
 
 ## The difference: one call vs. a loop
 
@@ -28,16 +28,18 @@ observations, instead of asking it to plan everything up front in one shot. Each
 iteration, the model sees what actually happened last time before deciding what to do
 next.
 
-## What this would look like for exploratory testing
+## What this looks like for exploratory testing
 
-The idea behind the "autonomous exploratory testing agent" that got scoped out of this
-repo: give the model a small toolbox —
+This is what `challenges/03-exploratory-testing-agent/` builds: give the model a small
+toolbox —
 
-- `navigate(url)`
-- `click(selector-or-description)`
-- `type(selector, text)`
-- `read_page()` — returns something like an accessibility-tree snapshot or the visible
-  text, so the model can decide what to do next without you hand-feeding it state
+- `navigate(path)` — an in-app hash route, e.g. `#/active`
+- `click(selector)`
+- `type(selector, text, pressEnter?)`
+- `read_page()` — a scoped DOM snapshot, so the model can decide what to do next
+  without you hand-feeding it state
+- `finish(report)` — a dedicated, schema-validated stopping tool (see "Stopping
+  conditions" below)
 
 — and a goal like "explore this app and report anything that looks broken." Each
 iteration: the model picks one tool call, your code executes it for real against
@@ -69,6 +71,9 @@ adds failure modes that only show up *across* iterations:
   output, is still mostly an open problem in applied agent design.
 
 None of this is a reason to avoid building it — it's the actual shape of the problem
-if you do. If you come back to the "autonomous exploratory agent" idea later, start
-small: a toolbox of three or four actions, a hard iteration cap, and a log of every
-tool call and result printed to the console before you worry about anything fancier.
+if you do. Challenge 3 is that starting-small version: a toolbox of four actions, a
+hard iteration cap, and a log of every tool call and result printed to the console. Its
+test only validates trajectory *shape* -- the loop stayed within the cap and ended by
+calling `finish` with a schema-valid report -- never trajectory *quality*. Whether any
+given run was a *reasonable* way to explore a todo app is still exactly the open
+problem described above; nothing here claims to have solved it.

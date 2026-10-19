@@ -19,7 +19,7 @@ letting you just recognize the ideas on the page.
 | [`02-structured-output-and-tool-use.md`](./02-structured-output-and-tool-use.md) | Both challenges | Forcing an LLM to return structured, schema-conformant data instead of free text or code — the mechanic both challenges are built on. |
 | [`03-anthropic-sdk-vs-langchain.md`](./03-anthropic-sdk-vs-langchain.md) | Both challenges | What the raw `@anthropic-ai/sdk` call looks like underneath, versus what `@langchain/anthropic` abstracts away — why you're implementing everything twice. |
 | [`04-guardrails-and-trust.md`](./04-guardrails-and-trust.md) | Challenge 2 | Why schema validation alone isn't enough, the DOM-snapshot prompt-injection angle, and fail-safe design for acting on model output. |
-| [`05-agents-and-tool-loops.md`](./05-agents-and-tool-loops.md) | Neither (forward-looking) | What changes once a model takes multiple actions in a loop instead of answering once — context for building an autonomous exploratory-testing agent later. |
+| [`05-agents-and-tool-loops.md`](./05-agents-and-tool-loops.md) | Challenge 3 | What changes once a model takes multiple actions in a loop instead of answering once — the mechanic Challenge 3 implements as an exploratory-testing agent. |
 
 ## How this maps to the repo
 
@@ -29,10 +29,9 @@ letting you just recognize the ideas on the page.
   response is then *acted on* (a new locator is used for real). Read docs 02, 03, and
   04 first — 04 is the one explaining why that "acted on" part needs an extra safety
   net.
-- **Doc 05** doesn't map to anything implemented here. Both challenges are a single
-  request/response; nothing in this repo loops a model through multiple actions. It's
-  included because that's the natural next step if you want to build the "autonomous
-  exploratory agent" idea that got scoped out of this repo (see the root `README.md`).
+- **Challenge 3 (Exploratory Testing Agent)** loops a model through multiple real tool
+  calls instead of one request/response -- read doc 05 first, and doc 04 again for the
+  path/selector guardrails applied per tool call.
 
 ## Curious how this repo itself came together?
 

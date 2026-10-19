@@ -9,6 +9,8 @@
     "test:challenge1:langchain": "cross-env LLM_PROVIDER=langchain playwright test challenges/01-ai-test-case-generator",
     "test:challenge2": "cross-env LLM_PROVIDER=anthropic playwright test challenges/02-self-healing-locators",
     "test:challenge2:langchain": "cross-env LLM_PROVIDER=langchain playwright test challenges/02-self-healing-locators",
+    "test:challenge3": "cross-env LLM_PROVIDER=anthropic playwright test challenges/03-exploratory-testing-agent",
+    "test:challenge3:langchain": "cross-env LLM_PROVIDER=langchain playwright test challenges/03-exploratory-testing-agent",
     "test:all": "playwright test",
     "typecheck": "tsc -p .",
     "lint": "eslint .",
