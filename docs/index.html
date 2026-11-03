@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI mint tutor – a prompt</title>
+<meta name="description" content="Másold ki a tutor promptot, és próbáld ki bármelyik ingyenes chatbotban.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧑‍🏫</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --ground: #EEF1F5;
+    --surface: #FFFFFF;
+    --ink: #17202B;
+    --muted: #556273;
+    --line: #D5DBE3;
+    --accent: #F2A541;
+    --accent-ink: #8A4A05;
+    --token-bg: #FCEBD2;
+    --focus: #1F5FBF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --ground: #12161C;
+      --surface: #1B2129;
+      --ink: #E8ECF1;
+      --muted: #9AA4B2;
+      --line: #2E3642;
+      --accent: #F2A541;
+      --accent-ink: #F6BE72;
+      --token-bg: #3A2C17;
+      --focus: #7FB2FF;
+    }
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+    padding: calc(env(safe-area-inset-top, 0px) + 28px) 20px calc(env(safe-area-inset-bottom, 0px) + 40px);
+  }
+  main { max-width: 640px; margin: 0 auto; }
+
+  h1 {
+    font-size: clamp(2rem, 7vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+  }
+  .lead { color: var(--muted); margin: 0 0 28px; max-width: 34em; }
+
+  .topic { margin: 0 0 20px; }
+  .topic label { display: block; font-weight: 600; margin-bottom: 8px; }
+  .topic input {
+    width: 100%;
+    font: inherit;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .topic input::placeholder { color: var(--muted); }
+  .topic .hint { color: var(--muted); font-size: 0.9rem; margin: 8px 0 0; }
+
+  .prompt {
+    background: var(--surface);
+    border: 1.5px solid var(--line);
+    border-radius: 18px 18px 18px 4px;
+    padding: 22px 22px 24px;
+    margin: 0 0 18px;
+  }
+  .prompt p { margin: 0 0 12px; }
+  .prompt ol { margin: 0 0 12px; padding-left: 1.4em; }
+  .prompt li { margin-bottom: 8px; padding-left: 0.2em; }
+  .prompt p:last-child { margin-bottom: 0; }
+  .token {
+    background: var(--token-bg);
+    color: var(--accent-ink);
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 1px 6px;
+  }
+
+  .copy {
+    width: 100%;
+    font: inherit;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #17202B;
+    background: var(--accent);
+    border: 0;
+    border-radius: 14px;
+    padding: 16px 20px;
+    cursor: pointer;
+  }
+  .copy:active { transform: translateY(1px); }
+  .status { min-height: 1.6em; color: var(--muted); font-size: 0.95rem; margin: 10px 0 0; text-align: center; }
+
+  footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1.5px solid var(--line);
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  footer p { margin: 0 0 8px; }
+  a { color: var(--accent-ink); text-underline-offset: 3px; }
+
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { .copy:active { transform: none; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Ne válaszoljon az AI. Kérdezzen.</h1>
+  <p class="lead">Írd be a témád, másold ki a promptot, és illeszd be egy ingyenes chatbotba, például a ChatGPT-be vagy a Geminibe.</p>
+
+  <div class="topic">
+    <label for="topic">A témád</label>
+    <input id="topic" type="text" autocomplete="off" placeholder="például egy webshop kosarának tesztelése">
+    <p class="hint">Ha üresen hagyod, a tutor egy weboldal bejelentkezésének tesztelésével kezd.</p>
+  </div>
+
+  <div class="prompt" id="prompt">
+    <p>Légy a tutorom a következő témában: <span class="token" id="token">[téma]</span>. Ha nincs ötletem, legyen a téma egy weboldal bejelentkezésének tesztelése.</p>
+    <ol>
+      <li>Adj egy rövid, valósághű, kezdő szintű feladatot. Ne magyarázz előtte semmit, és ne adj megoldást.</li>
+      <li>Amikor válaszolok, kérdezz rá a döntéseimre, egyszerre csak egy kérdéssel, és mutasd meg, mi maradt ki.</li>
+      <li>Csak ezután magyarázd el 2-3 mondatban, mitől jó egy megoldás ebben a témában, és kérd, hogy írjam át a válaszom.</li>
+      <li>A végén értékeld a megoldásom három szempont szerint: helyesség, teljesség, és hogy meg tudom-e indokolni a döntéseimet. Mondd meg, mit gyakoroljak legközelebb.</li>
+    </ol>
+    <p>Tippet csak akkor adj, ha kérek.</p>
+  </div>
+
+  <button class="copy" id="copy" type="button">Prompt másolása</button>
+  <p class="status" id="status" role="status" aria-live="polite"></p>
+
+  <footer>
+    <p>A háttéranyagok és a gyakorlópromptok a <a href="https://github.com/sorosz89/claude-playwright-tutor">GitHub repóban</a> vannak.</p>
+    <p>Orosz Sándor, Quality Engineering · <a href="https://www.linkedin.com/in/sandor-orosz/">LinkedIn</a></p>
+  </footer>
+</main>
+
+<script>
+  const input = document.getElementById('topic');
+  const token = document.getElementById('token');
+  const button = document.getElementById('copy');
+  const status = document.getElementById('status');
+
+  input.addEventListener('input', () => {
+    const value = input.value.trim();
+    token.textContent = value || '[téma]';
+    button.textContent = 'Prompt másolása';
+    status.textContent = '';
+  });
+
+  function promptText() {
+    const el = document.getElementById('prompt');
+    const intro = el.querySelector('p').textContent.trim();
+    const steps = [...el.querySelectorAll('li')].map((li, i) => `${i + 1}. ${li.textContent.trim()}`);
+    const outro = el.querySelector('p:last-child').textContent.trim();
+    return [intro, ...steps, outro].join('\n');
+  }
+
+  function fallbackCopy(text) {
+    const area = document.createElement('textarea');
+    area.value = text;
+    area.setAttribute('readonly', '');
+    area.style.position = 'fixed';
+    area.style.opacity = '0';
+    document.body.appendChild(area);
+    area.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(area);
+    return ok;
+  }
+
+  button.addEventListener('click', async () => {
+    const text = promptText();
+    let ok = false;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        ok = true;
+      } else {
+        ok = fallbackCopy(text);
+      }
+    } catch (e) {
+      ok = fallbackCopy(text);
+    }
+    if (ok) {
+      button.textContent = 'Kimásolva';
+      status.textContent = 'Most illeszd be egy chatbotba, és válaszolj az első feladatra.';
+    } else {
+      status.textContent = 'A másolás nem sikerült. Jelöld ki a szöveget kézzel, és másold ki.';
+    }
+  });
+</script>
+</body>
+</html>
